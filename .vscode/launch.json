@@ -29,6 +29,26 @@
             "mainClass": "com.example.Product.ProductApplication",
             "projectName": "Product",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringBootKafkaProducer<spring-cloud-kafka-producer>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "csci318.demo.SpringBootKafkaProducer",
+            "projectName": "spring-cloud-kafka-producer",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringBootKafkaProcessor<spring-cloud-kafka-processor>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "csci318.demo.SpringBootKafkaProcessor",
+            "projectName": "spring-cloud-kafka-processor",
+            "args": ""
         }
     ]
 }
