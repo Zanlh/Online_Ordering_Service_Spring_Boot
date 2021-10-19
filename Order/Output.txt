@@ -1,0 +1,56 @@
+C:\Users\zanlw>curl -i -X POST -H "Content-Type:application/json" -d "{\"product\": \"Phone\",  \"supplier\" : \"1\",  \"quantity\" : \"1199\"}" http://localhost:8081/orders
+HTTP/1.1 201
+Location: http://localhost:8081/orders/1
+Content-Type: application/hal+json
+Transfer-Encoding: chunked
+Date: Sat, 25 Sep 2021 09:14:18 GMT
+
+{"id":1,"supplier":1,"product":"Phone","quantity":1199,"_links":{"self":{"href":"http://localhost:8081/orders/1"},"orders":{"href":"http://localhost:8081/orders"}}}
+C:\Users\zanlw>
+C:\Users\zanlw>curl -i -X POST -H "Content-Type:application/json" -d "{\"product\": \"Ramen\",  \"supplier\" : \"2\",  \"quantity\" : \"1199\"}" http://localhost:8081/orders
+HTTP/1.1 201
+Location: http://localhost:8081/orders/2
+Content-Type: application/hal+json
+Transfer-Encoding: chunked
+Date: Sat, 25 Sep 2021 09:14:18 GMT
+
+{"id":2,"supplier":2,"product":"Ramen","quantity":1199,"_links":{"self":{"href":"http://localhost:8081/orders/2"},"orders":{"href":"http://localhost:8081/orders"}}}
+C:\Users\zanlw>
+
+==================================================================
+C:\Users\zanlw>
+C:\Users\zanlw>curl -v localhost:8081/orders
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8081 (#0)
+> GET /orders HTTP/1.1
+> Host: localhost:8081
+> User-Agent: curl/7.55.1
+> Accept: */*
+>
+< HTTP/1.1 200
+< Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+< Date: Sat, 25 Sep 2021 09:14:49 GMT
+<
+{"_embedded":{"orderList":[{"id":1,"supplier":1,"product":"Phone","quantity":1199,"_links":{"self":{"href":"http://localhost:8081/orders/1"},"orders":{"href":"http://localhost:8081/orders"}}},{"id":2,"supplier":2,"product":"Ramen","quantity":1199,"_links":{"self":{"href":"http://localhost:8081/orders/2"},"orders":{"href":"http://localhost:8081/orders"}}}]},"_links":{"self":{"href":"http://localhost:8081/orders"}}}* Connection #0 to host localhost left intact
+
+C:\Users\zanlw>
+==================================================================
+C:\Users\zanlw>curl -i -X PUT -H "Content-Type:application/json" -d "{\"product\": \"Iphone\",  \"supplier\" : \"2\",  \"quantity\" : \"1199\"}" http://localhost:8081/orders/1
+HTTP/1.1 201
+Location: http://localhost:8081/orders/1
+Content-Type: application/hal+json
+Transfer-Encoding: chunked
+Date: Sat, 25 Sep 2021 09:15:21 GMT
+
+{"id":1,"supplier":2,"product":"Iphone","quantity":1199,"_links":{"self":{"href":"http://localhost:8081/orders/1"},"orders":{"href":"http://localhost:8081/orders"}}}
+C:\Users\zanlw>
+==================================================================
+
+C:\Users\zanlw>curl -i -X DELETE http://localhost:8081/orders/1
+HTTP/1.1 204
+Date: Sat, 25 Sep 2021 09:15:40 GMT
+
+
+C:\Users\zanlw>

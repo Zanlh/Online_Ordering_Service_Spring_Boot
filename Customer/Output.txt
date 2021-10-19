@@ -1,0 +1,122 @@
+C:\Users\zanlw>curl -i -X POST -H "Content-Type:application/json" -d "{\"companyName\": \"Google\",  \"address\" : \"New York\",  \"country\" : \"USA\" }" http://localhost:8080/customers
+HTTP/1.1 201
+Location: http://localhost:8080/customers/1
+Content-Type: application/hal+json
+Transfer-Encoding: chunked
+Date: Fri, 24 Sep 2021 12:58:06 GMT
+
+{"id":1,"companyName":"Google","address":"New York","country":"USA","_links":{"self":{"href":"http://localhost:8080/customers/1"},"customers":{"href":"http://localhost:8080/customers"}}}
+C:\Users\zanlw>
+C:\Users\zanlw>curl -i -X POST -H "Content-Type:application/json" -d "{\"companyName\": \"Facebook\",  \"address\" : \"Los Angeles\",  \"country\" : \"USA\" }" http://localhost:8080/customers
+HTTP/1.1 201
+Location: http://localhost:8080/customers/2
+Content-Type: application/hal+json
+Transfer-Encoding: chunked
+Date: Fri, 24 Sep 2021 12:58:06 GMT
+
+{"id":2,"companyName":"Facebook","address":"Los Angeles","country":"USA","_links":{"self":{"href":"http://localhost:8080/customers/2"},"customers":{"href":"http://localhost:8080/customers"}}}
+C:\Users\zanlw>
+========================================================================================================
+C:\Users\zanlw>curl -i -X POST -H "Content-Type:application/json" -d "{\"name\": \"Sundar Pichai\",  \"phone\" : \"123456789\",  \"email\" : \"Pichai@gmail.com\",  \"position\" : \"CEO\" }" http://localhost:8080/contacts
+HTTP/1.1 201
+Location: http://localhost:8080/contacts/3
+Content-Type: application/hal+json
+Transfer-Encoding: chunked
+Date: Fri, 24 Sep 2021 13:00:09 GMT
+
+{"id":3,"name":"Sundar Pichai","phone":"123456789","email":"Pichai@gmail.com","position":"CEO","customer":null,"_links":{"self":{"href":"http://localhost:8080/contacts/3"},"contacts":{"href":"http://localhost:8080/contacts"}}}
+C:\Users\zanlw>
+C:\Users\zanlw>curl -i -X POST -H "Content-Type:application/json" -d "{\"name\": \"Mark\",  \"phone\" : \"123456789\",  \"email\" : \"Mark@gmail.com\",  \"position\" : \"CEO\" }" http://localhost:8080/contacts
+HTTP/1.1 201
+Location: http://localhost:8080/contacts/4
+Content-Type: application/hal+json
+Transfer-Encoding: chunked
+Date: Fri, 24 Sep 2021 13:00:09 GMT
+
+{"id":4,"name":"Mark","phone":"123456789","email":"Mark@gmail.com","position":"CEO","customer":null,"_links":{"self":{"href":"http://localhost:8080/contacts/4"},"contacts":{"href":"http://localhost:8080/contacts"}}}
+C:\Users\zanlw>
+========================================================================================================
+C:\Users\zanlw>curl -i -X PUT http://localhost:8080/customers/1/contacts/3
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 24 Sep 2021 13:01:16 GMT
+
+{"id":1,"companyName":"Google","address":"New York","country":"USA"}
+C:\Users\zanlw>
+C:\Users\zanlw>curl -i -X PUT http://localhost:8080/customers/2/contacts/4
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 24 Sep 2021 13:01:20 GMT
+
+{"id":2,"companyName":"Facebook","address":"Los Angeles","country":"USA"}
+C:\Users\zanlw>
+========================================================================================================
+C:\Users\zanlw>curl -v localhost:8080/customers
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> GET /customers HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.55.1
+> Accept: */*
+>
+< HTTP/1.1 200
+< Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+< Date: Sat, 25 Sep 2021 06:27:32 GMT
+<
+{"_embedded":{"customerList":[{"id":1,"companyName":"Google","address":"New York","country":"USA","customerContact":{"id":3,"name":"Sundar Pichai","phone":"123456789","email":"Pichai@gmail.com","position":"CEO"},"_links":{"self":{"href":"http://localhost:8080/customers/1"},"customers":{"href":"http://localhost:8080/customers"}}},{"id":2,"companyName":"Facebook","address":"Los Angeles","country":"USA","customerContact":{"id":4,"name":"Mark","phone":"123456789","email":"Mark@gmail.com","position":"CEO"},"_links":{"self":{"href":"http://localhost:8080/customers/2"},"customers":{"href":"http://localhost:8080/customers"}}}]},"_links":{"self":{"href":"http://localhost:8080/customers"}}}* Connection #0 to host localhost left intact
+
+C:\Users\zanlw>
+C:\Users\zanlw>curl -v localhost:8080/contacts
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> GET /contacts HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.55.1
+> Accept: */*
+>
+< HTTP/1.1 200
+< Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+< Date: Sat, 25 Sep 2021 06:27:32 GMT
+<
+{"_embedded":{"customerContactList":[{"id":3,"name":"Sundar Pichai","phone":"123456789","email":"Pichai@gmail.com","position":"CEO","_links":{"self":{"href":"http://localhost:8080/contacts/3"},"contacts":{"href":"http://localhost:8080/contacts"}}},{"id":4,"name":"Mark","phone":"123456789","email":"Mark@gmail.com","position":"CEO","_links":{"self":{"href":"http://localhost:8080/contacts/4"},"contacts":{"href":"http://localhost:8080/contacts"}}}]},"_links":{"self":{"href":"http://localhost:8080/customers"}}}* Connection #0 to host localhost left intact
+
+C:\Users\zanlw>
+========================================================================================================
+C:\Users\zanlw>curl -i -X PUT -H "Content-Type:application/json" -d "{\"companyName\": \"Zan\",  \"address\" : \"Orchard\",  \"country\" : \"Singapore\" }" http://localhost:8080/customers/1
+HTTP/1.1 201
+Location: http://localhost:8080/customers/1
+Content-Type: application/hal+json
+Transfer-Encoding: chunked
+Date: Fri, 24 Sep 2021 13:03:51 GMT
+
+{"id":1,"companyName":"Zan","address":"Orchard","country":"Singapore","_links":{"self":{"href":"http://localhost:8080/customers/1"},"customers":{"href":"http://localhost:8080/customers"}}}
+C:\Users\zanlw>
+========================================================================================================
+curl -i -X PUT -H "Content-Type:application/json" -d "{\"name\": \"Man\",  \"phone\" : \"01504436\",  \"email\" : \"man@gmail.com\",  \"position\" : \"Fullstack Developer\" }" http://localhost:8080/contacts/4
+HTTP/1.1 201
+Location: http://localhost:8080/contacts/4
+Content-Type: application/hal+json
+Transfer-Encoding: chunked
+Date: Fri, 24 Sep 2021 13:04:22 GMT
+
+{"id":4,"name":"Man","phone":"01504436","email":"man@gmail.com","position":"Fullstack Developer","customer":{"id":2,"companyName":"Facebook","address":"Los Angeles","country":"USA"},"_links":{"self":{"href":"http://localhost:8080/contacts/4"},"contacts":{"href":"http://localhost:8080/contacts"}}}
+========================================================================================================
+C:\Users\zanlw>curl -i -X DELETE http://localhost:8080/customers/1
+HTTP/1.1 204
+Date: Fri, 24 Sep 2021 13:06:06 GMT
+
+
+C:\Users\zanlw>
+C:\Users\zanlw>// Delete Customers Contacts
+'//' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\zanlw>curl -i -X DELETE http://localhost:8080/contacts/3
+HTTP/1.1 204
+Date: Fri, 24 Sep 2021 13:06:18 GMT

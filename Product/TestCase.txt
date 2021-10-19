@@ -1,0 +1,41 @@
+Build Instruction
+
+In IDE MAVEN Drop Down
+MAVEN > install
+cd target
+java -jar Product-0.0.1-SNAPSHOT.jar
+============================================
+Your Directory > cd Product
+mvnw -Dmaven.test.skip=true spring-boot:run
+
+// Post Product
+curl -i -X POST -H "Content-Type:application/json" -d "{\"productCategory\": \"Phone\",  \"name\" : \"Iphone 13 pro max\",  \"price\" : \"1199\",  \"stockQuantity\" : \"100\" }" http://localhost:8082/products
+
+curl -i -X POST -H "Content-Type:application/json" -d "{\"productCategory\": \"Food\",  \"name\" : \"Shin Ramen\",  \"price\" : \"1.99\",  \"stockQuantity\" : \"500\" }" http://localhost:8082/products
+
+// Post Product Detail
+curl -i -X POST -H "Content-Type:application/json" -d "{\"description\": \"Apple Iphone\",  \"comment\" : \"Good Phone\" }" http://localhost:8082/details
+
+curl -i -X POST -H "Content-Type:application/json" -d "{\"description\": \"Japanese Ramen\",  \"comment\" : \"Instant Noodle\" }" http://localhost:8082/details
+
+// One to one relation to Product and Detail
+curl -i -X PUT http://localhost:8082/products/1/details/3
+
+curl -i -X PUT http://localhost:8082/products/2/details/4
+
+// Look up Product and Detail
+curl -v localhost:8082/products
+
+curl -v localhost:8082/details
+
+// Update Product
+curl -i -X PUT -H "Content-Type:application/json" -d "{\"productCategory\": \"Phone\",  \"name\" : \"Iphone 13\",  \"price\" : \"999\",  \"stockQuantity\" : \"100\" }" http://localhost:8082/products/1
+
+// Update Detail
+curl -i -X PUT -H "Content-Type:application/json" -d "{\"description\": \"Apple Iphone\",  \"comment\" : \"Nice Phone\" }" http://localhost:8082/details/3
+
+// Delete Product
+curl -i -X DELETE http://localhost:8082/products/1
+
+// Delete Product Detail
+curl -i -X DELETE http://localhost:8082/details/3

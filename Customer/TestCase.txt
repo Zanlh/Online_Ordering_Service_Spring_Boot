@@ -1,0 +1,42 @@
+Build Instruction
+
+In IDE MAVEN Drop Down
+MAVEN > install
+cd target
+java -jar Customer-0.0.1-SNAPSHOT.jar
+============================================
+Your Directory > cd Customer
+mvnw -Dmaven.test.skip=true spring-boot:run
+========================================================================================================
+
+// Post Customers
+curl -i -X POST -H "Content-Type:application/json" -d "{\"companyName\": \"Google\",  \"address\" : \"New York\",  \"country\" : \"USA\" }" http://localhost:8080/customers
+
+curl -i -X POST -H "Content-Type:application/json" -d "{\"companyName\": \"Facebook\",  \"address\" : \"Los Angeles\",  \"country\" : \"USA\" }" http://localhost:8080/customers
+
+// Post Customers Contacts
+curl -i -X POST -H "Content-Type:application/json" -d "{\"name\": \"Sundar Pichai\",  \"phone\" : \"123456789\",  \"email\" : \"Pichai@gmail.com\",  \"position\" : \"CEO\" }" http://localhost:8080/contacts
+
+curl -i -X POST -H "Content-Type:application/json" -d "{\"name\": \"Mark\",  \"phone\" : \"123456789\",  \"email\" : \"Mark@gmail.com\",  \"position\" : \"CEO\" }" http://localhost:8080/contacts
+
+// One to one relation to Customers and Contacts
+curl -i -X PUT http://localhost:8080/customers/1/contacts/3
+
+curl -i -X PUT http://localhost:8080/customers/2/contacts/4
+
+// Look up customers and contacts
+curl -v localhost:8080/customers
+
+curl -v localhost:8080/contacts
+
+// Update customers
+curl -i -X PUT -H "Content-Type:application/json" -d "{\"companyName\": \"Zan\",  \"address\" : \"Orchard\",  \"country\" : \"Singapore\" }" http://localhost:8080/customers/1
+
+// Update contacts
+curl -i -X PUT -H "Content-Type:application/json" -d "{\"name\": \"Man\",  \"phone\" : \"01504436\",  \"email\" : \"man@gmail.com\",  \"position\" : \"Fullstack Developer\" }" http://localhost:8080/contacts/4
+
+// Delete Customers
+curl -i -X DELETE http://localhost:8080/customers/1
+
+// Delete Customers Contacts
+curl -i -X DELETE http://localhost:8080/contacts/3

@@ -1,0 +1,23 @@
+Build Instruction
+
+In IDE MAVEN Drop Down
+MAVEN > install
+cd target
+java -jar Order-0.0.1-SNAPSHOT.jar
+============================================
+Your Directory > cd Order
+mvnw -Dmaven.test.skip=true spring-boot:run
+
+// Post Orders
+curl -i -X POST -H "Content-Type:application/json" -d "{\"product\": \"Phone\",  \"supplier\" : \"1\",  \"quantity\" : \"1199\"}" http://localhost:8081/orders
+
+curl -i -X POST -H "Content-Type:application/json" -d "{\"product\": \"Ramen\",  \"supplier\" : \"2\",  \"quantity\" : \"1199\"}" http://localhost:8081/orders
+
+// Look up Orders
+curl -v localhost:8081/orders
+
+// Update Orders
+curl -i -X PUT -H "Content-Type:application/json" -d "{\"product\": \"Iphone\",  \"supplier\" : \"2\",  \"quantity\" : \"1199\"}" http://localhost:8081/orders/1
+
+// Delete Order
+curl -i -X DELETE http://localhost:8081/orders/1

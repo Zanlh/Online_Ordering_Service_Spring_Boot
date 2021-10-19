@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CustomerApplication<Customer>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.example.Customer.CustomerApplication",
+            "projectName": "Customer",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-OrderApplication<Order>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.example.Order.OrderApplication",
+            "projectName": "Order",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProductApplication<Product>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.example.Product.ProductApplication",
+            "projectName": "Product",
+            "args": ""
+        }
+    ]
+}
