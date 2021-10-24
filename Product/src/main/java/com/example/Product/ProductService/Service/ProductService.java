@@ -60,6 +60,11 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public Product getProductByName(String productName){
+        Product product = productRepository.findById(productRepository.findByName(productName)).orElseThrow(RuntimeException::new);
+        return product;
+    }
+
     public void deleteProduct(Long id){
         productRepository.deleteById(id);
     }

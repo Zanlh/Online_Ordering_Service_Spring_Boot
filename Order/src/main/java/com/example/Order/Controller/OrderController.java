@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.Order.Models.Customer;
 import com.example.Order.Models.CustomerContact;
 import com.example.Order.Models.Order;
+import com.example.Order.Models.Product;
 import com.example.Order.Service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,15 @@ public class OrderController {
     public String newOrder(@PathVariable Long customerId,@PathVariable String productName,@PathVariable int quantity) throws Exception{
                              
 		Customer customer = restTemplate.getForObject("http://localhost:8080/customers/"+customerId, Customer.class);
+        Product product = restTemplate.getForObject("http://localhost:80802/products/"+productName, Product.class);
         if(!customerId.equals(customer.getId())) throw new Exception("User not found");
-           
+        
         if(customerId.equals(customer.getId())){
             orderService.recordOrder(customerId, productName, quantity);
-            return customer.getAddress() +" "+customer.getCustomerContact().getPhone();
+            return customer.getAddress() +" "+customer.getCustomerContact().getPhone()+"/n"+product.getPrice();
         }
+
+        
 
         return null;
         
