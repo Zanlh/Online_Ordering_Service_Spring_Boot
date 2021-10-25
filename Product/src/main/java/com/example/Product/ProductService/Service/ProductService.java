@@ -61,8 +61,7 @@ public class ProductService {
     }
 
     public Product getProductByName(String productName){
-        Product product = productRepository.findById(productRepository.findByName(productName)).orElseThrow(RuntimeException::new);
-        return product;
+        return productRepository.findByName(productName);
     }
 
     public void deleteProduct(Long id){
