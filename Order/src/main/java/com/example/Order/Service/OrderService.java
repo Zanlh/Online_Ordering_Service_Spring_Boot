@@ -10,6 +10,7 @@ import com.example.Order.Repository.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,9 +25,11 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public void recordOrder(Long customerId,String productName, int quantity){
+    @Scheduled(fixedRate = 2000)
+    public Order recordOrder(Long customerId,String productName, int quantity){
         Order newOrder = new Order(customerId, productName,quantity);
         publisher.publishEvent(newOrder);
+        return newOrder;
     }
 
     public List<Order> allOrders(){

@@ -9,6 +9,7 @@ import com.example.Order.Models.Product;
 import com.example.Order.Service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,15 +39,15 @@ public class OrderController {
     }
 
     @PostMapping("/order/{customerId}/{productName}/{quantity}")
-    public String newOrder(@PathVariable Long customerId,@PathVariable String productName,@PathVariable int quantity) throws Exception{
+    public Order newOrder(@PathVariable Long customerId,@PathVariable String productName,@PathVariable int quantity) throws Exception{
                              
 		Customer customer = restTemplate.getForObject("http://localhost:8080/customers/"+customerId, Customer.class);
         Product product = restTemplate.getForObject("http://localhost:8082/products/productName"+"?productName="+productName, Product.class);
         if(!customerId.equals(customer.getId())) throw new Exception("User not found");
         
         if(customerId.equals(customer.getId())){
-            orderService.recordOrder(customerId, productName, quantity);
-            return customer.getAddress() +" "+customer.getCustomerContact().getPhone()+"\n"+product.getPrice();
+            return orderService.recordOrder(customerId, productName, quantity);
+            //return customer.getAddress() +" "+customer.getCustomerContact().getPhone()+"\n"+product.getPrice();
         }
 
         
