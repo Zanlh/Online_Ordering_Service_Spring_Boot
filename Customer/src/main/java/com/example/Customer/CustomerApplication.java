@@ -51,7 +51,7 @@ public class CustomerApplication {
 			contact2.setPosition("CEO");
 			ResponseEntity<Customer> postCustomer2 = restTemplate.postForEntity("http://localhost:8080/customers", customer2, Customer.class);
 			ResponseEntity<CustomerContact> postCustomerContact2 = restTemplate.postForEntity("http://localhost:8080/contacts", contact2, CustomerContact.class);
-			restTemplate.put("http://localhost:8080/customers/3/contacts/4");
+			restTemplate.put("http://localhost:8080/customers/3/contacts/4",Customer.class);
 
 			Customer customer3 = new Customer();
 			customer3.setCompanyName("Cisco");
@@ -64,7 +64,7 @@ public class CustomerApplication {
 			contact3.setPosition("CEO");
 			ResponseEntity<Customer> postCustomer3 = restTemplate.postForEntity("http://localhost:8080/customers", customer3, Customer.class);
 			ResponseEntity<CustomerContact> postCustomerContact3 = restTemplate.postForEntity("http://localhost:8080/contacts", contact3, CustomerContact.class);
-			restTemplate.put("http://localhost:8080/customers/5/contacts/6");
+			restTemplate.put("http://localhost:8080/customers/5/contacts/6",Customer.class);
 
 			Customer customer4 = new Customer();
 			customer4.setCompanyName("Microsoft");
@@ -77,7 +77,7 @@ public class CustomerApplication {
 			contact4.setPosition("CEO");
 			ResponseEntity<Customer> postCustomer4 = restTemplate.postForEntity("http://localhost:8080/customers", customer4, Customer.class);
 			ResponseEntity<CustomerContact> postCustomerContact4 = restTemplate.postForEntity("http://localhost:8080/contacts", contact4, CustomerContact.class);
-			restTemplate.put("http://localhost:8080/customers/7/contacts/8");
+			restTemplate.put("http://localhost:8080/customers/7/contacts/8",Customer.class);
 
 			Customer customer5 = new Customer();
 			customer5.setCompanyName("Advanced Micro Devices");
@@ -90,7 +90,7 @@ public class CustomerApplication {
 			contact5.setPosition("CEO");
 			ResponseEntity<Customer> postCustomer5 = restTemplate.postForEntity("http://localhost:8080/customers", customer5, Customer.class);
 			ResponseEntity<CustomerContact> postCustomerContact5 = restTemplate.postForEntity("http://localhost:8080/contacts", contact5, CustomerContact.class);
-			restTemplate.put("http://localhost:8080/customers/9/contacts/10");
+			restTemplate.put("http://localhost:8080/customers/9/contacts/10",Customer.class);
 		};
 	}
 
