@@ -5,7 +5,7 @@ spring.cloud.stream:
       destination: appliance-topic
   kafka.binder:
     configuration:
-      commit.interval.ms: 5000
+      commit.interval.ms: 1000
     brokers: localhost:9092
     serdeError: logAndContinue
   kafka.bindings:

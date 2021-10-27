@@ -1,5 +1,6 @@
 package csci318.demo.service;
 
+import csci318.demo.model.Equipment;
 import org.apache.kafka.streams.state.KeyValueIterator;
 import org.apache.kafka.streams.state.QueryableStoreTypes;
 import org.apache.kafka.streams.state.ReadOnlyKeyValueStore;
@@ -13,7 +14,7 @@ import java.util.NoSuchElementException;
 @Service
 public class BrandInteractiveQuery {
 
-    private InteractiveQueryService interactiveQueryService;
+    private final InteractiveQueryService interactiveQueryService;
 
     //@Autowired
     public BrandInteractiveQuery(InteractiveQueryService interactiveQueryService) {
@@ -21,18 +22,16 @@ public class BrandInteractiveQuery {
     }
 
     public long getBrandQuantity(String brandName) {
-        if (keyValueStore().get(brandName) != null) {
-            return keyValueStore().get(brandName);
-            //long quantity = keyValueStore().get(brandName);
-            //return new BrandQuantity(brandName, quantity);
+        if (brandStore().get(brandName) != null) {
+            return brandStore().get(brandName);
         } else {
             throw new NoSuchElementException(); //TODO: should use a customised exception.
         }
     }
 
-    public List<String> getBrandNames() {
+    public List<String> getBrandList() {
         List<String> brandList = new ArrayList<>();
-        KeyValueIterator<String, Long> all = keyValueStore().all();
+        KeyValueIterator<String, Long> all = brandStore().all();
         while (all.hasNext()) {
             String next = all.next().key;
             brandList.add(next);
@@ -40,9 +39,42 @@ public class BrandInteractiveQuery {
         return brandList;
     }
 
-    private ReadOnlyKeyValueStore<String, Long> keyValueStore() {
-        return this.interactiveQueryService.getQueryableStore(ApplianceStreamProcessing.STATE_STORE,
+    public List<String> getEquipmentListByBrand(String brandString) {
+        List<String> equipmentList = new ArrayList<>();
+        KeyValueIterator<String, Equipment> all = equipmentStore().all();
+        while (all.hasNext()) {
+            Equipment equipment = all.next().value;
+            String brand_name = equipment.getBrand();
+            String equipment_name = equipment.getEquipment();
+            if (brand_name.equals(brandString)){
+                equipmentList.add(equipment_name);
+            }
+        }
+        return equipmentList;
+    }
+
+
+    public List<String> getEquipmentList() {
+        List<String> equipmentList = new ArrayList<>();
+        KeyValueIterator<String, Equipment> all = equipmentStore().all();
+        while (all.hasNext()) {
+            String equipment_name = all.next().value.getEquipment();
+            equipmentList.add(equipment_name);
+        }
+
+        return equipmentList;
+    }
+
+    private ReadOnlyKeyValueStore<String, Long> brandStore() {
+        return this.interactiveQueryService.getQueryableStore(ApplianceStreamProcessing.BRAND_STATE_STORE,
                 QueryableStoreTypes.keyValueStore());
     }
+
+
+    private ReadOnlyKeyValueStore<String, Equipment> equipmentStore() {
+        return this.interactiveQueryService.getQueryableStore(ApplianceStreamProcessing.EQUIPMENT_STATE_STORE,
+                QueryableStoreTypes.keyValueStore());
+    }
+
 
 }

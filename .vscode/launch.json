@@ -49,6 +49,16 @@
             "mainClass": "csci318.demo.SpringBootKafkaProcessor",
             "projectName": "spring-cloud-kafka-processor",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProcessorApplication<Processor>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.example.Processor.ProcessorApplication",
+            "projectName": "Processor",
+            "args": ""
         }
     ]
 }

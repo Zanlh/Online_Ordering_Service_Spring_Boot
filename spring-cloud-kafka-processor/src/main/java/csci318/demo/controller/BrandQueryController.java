@@ -20,8 +20,19 @@ public class BrandQueryController {
     }
 
     @GetMapping("/brands/all")
-    List<String> getAllBrandNames() {
-        return brandInteractiveQuery.getBrandNames();
+    List<String> getAllBrands() {
+        return brandInteractiveQuery.getBrandList();
+    }
+
+
+    @GetMapping("/brand/{brandName}/equipments")
+    List<String> getAllEquipmentsByBrand(@PathVariable String brandName) {
+        return  brandInteractiveQuery.getEquipmentListByBrand(brandName);
+    }
+
+    @GetMapping("/brand/all-equipments")
+    List<String> getAllEquipments() {
+        return  brandInteractiveQuery.getEquipmentList();
     }
 
 }
