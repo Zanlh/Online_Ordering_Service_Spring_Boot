@@ -38,15 +38,15 @@ public class OrderController {
         return orderService.allOrders();
     }
 
-    @PostMapping("/order/{customerId}/{productName}/{quantity}")
-    public Order newOrder(@PathVariable Long customerId,@PathVariable String productName,@PathVariable int quantity) throws Exception{
+    @PostMapping("/order/{customerId}/{productName}/{quantity}/{price}")
+    public Order newOrder(@PathVariable Long customerId,@PathVariable String productName,@PathVariable int quantity,@PathVariable String price) throws Exception{
                              
 		Customer customer = restTemplate.getForObject("http://localhost:8080/customers/"+customerId, Customer.class);
         Product product = restTemplate.getForObject("http://localhost:8082/products/productName"+"?productName="+productName, Product.class);
         if(!customerId.equals(customer.getId())) throw new Exception("User not found");
         
         if(customerId.equals(customer.getId())){
-            return orderService.recordOrder(customerId, productName, quantity);
+            return orderService.recordOrder(customerId, productName, quantity,price);
             //return customer.getAddress() +" "+customer.getCustomerContact().getPhone()+"\n"+product.getPrice();
         }
 

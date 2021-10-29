@@ -26,8 +26,8 @@ public class OrderService {
     }
 
     @Scheduled(fixedRate = 2000)
-    public Order recordOrder(Long customerId,String productName, int quantity){
-        Order newOrder = new Order(customerId, productName,quantity);
+    public Order recordOrder(Long customerId,String productName, int quantity,String price){
+        Order newOrder = new Order(customerId, productName,quantity,price);
         publisher.publishEvent(newOrder);
         return newOrder;
     }
