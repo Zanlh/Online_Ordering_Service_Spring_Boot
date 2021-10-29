@@ -35,5 +35,9 @@ public class OrderService {
     public List<Order> allOrders(){
         return orderRepository.findAll();
     }
+
+    public Order oneOrder(Long id){
+        return orderRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
     
 }

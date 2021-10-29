@@ -24,5 +24,10 @@ public class OrderQueryController {
     List<String> getAllProductsByCustomer(@PathVariable Long customerID){
         return orderInteractiveQuery.getProductListByCustomer(customerID);
     }
+
+    @GetMapping("/order/{customerID}/totalAmount")
+    List<Integer> gettotalAmountByCustomer(@PathVariable Long customerID){
+        return orderInteractiveQuery.getTotalAmountByCustomer(customerID);
+    }
 }
 

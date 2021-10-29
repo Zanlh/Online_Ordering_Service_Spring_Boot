@@ -38,6 +38,22 @@ public class OrderController {
         return orderService.allOrders();
     }
 
+    @GetMapping("/order/customer/{orderId}")
+    public String getCustomerInfoByOrderId(@PathVariable long orderId){
+
+        Order order = orderService.oneOrder(orderId);
+        Customer customer = restTemplate.getForObject("http://localhost:8080/customers/"+order.getSupplier(), Customer.class);
+        return customer.toString();
+    }
+
+    @GetMapping("/order/product/{orderId}")
+    public String getProductInfoByOrderId(@PathVariable long orderId){
+        Order order = orderService.oneOrder(orderId);
+        Product product = restTemplate.getForObject("http://localhost:8082/products/productName"+"?productName="+order.getProduct(), Product.class);
+        
+        return product.toString();
+    }
+
     @PostMapping("/order/{customerId}/{productName}/{quantity}/{price}")
     public Order newOrder(@PathVariable Long customerId,@PathVariable String productName,@PathVariable int quantity,@PathVariable String price) throws Exception{
                              
@@ -49,13 +65,9 @@ public class OrderController {
             return orderService.recordOrder(customerId, productName, quantity,price);
             //return customer.getAddress() +" "+customer.getCustomerContact().getPhone()+"\n"+product.getPrice();
         }
-
-        
-
         return null;
         
 		//System.out.println(customer.getCustomerContact().getName());
-
     }
     
 

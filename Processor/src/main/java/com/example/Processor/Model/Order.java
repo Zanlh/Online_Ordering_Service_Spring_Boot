@@ -17,9 +17,11 @@ public class Order  {
     private Long supplier;
     private String product;
     private int quantity;
+    private String price;
 
     public Order() {
     }
+
 
     public Long getId() {
         return this.id;
@@ -53,6 +55,14 @@ public class Order  {
         this.quantity = quantity;
     }
 
+    public String getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -60,9 +70,9 @@ public class Order  {
             ", supplier='" + getSupplier() + "'" +
             ", product='" + getProduct() + "'" +
             ", quantity='" + getQuantity() + "'" +
+            ", price='" + getPrice() + "'" +
             "}";
     }
-
-
+    
    
 }

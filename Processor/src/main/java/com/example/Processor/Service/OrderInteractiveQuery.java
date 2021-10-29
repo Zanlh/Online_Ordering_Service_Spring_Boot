@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.example.Processor.Model.Customer;
+import com.example.Processor.Model.TotalAmount;
 
 import org.apache.kafka.streams.state.KeyValueIterator;
 import org.apache.kafka.streams.state.QueryableStoreType;
@@ -57,6 +58,20 @@ public class OrderInteractiveQuery {
 
     }
 
+    public List<Integer> getTotalAmountByCustomer(Long id){
+        List<Integer> totalAmounts = new ArrayList<>();
+        KeyValueIterator<String, TotalAmount> all = totalStore().all();
+        while(all.hasNext()){
+            TotalAmount totalAmount = all.next().value;
+            Long customer_id = totalAmount.getId();
+            Integer amount = totalAmount.getTotalAmount();
+            if(customer_id.equals(id)){
+                totalAmounts.add(amount);
+            }
+        }
+        return totalAmounts;
+    }
+
 
     private ReadOnlyKeyValueStore<String,Long> productStore(){
         return this.interactiveQueryService.getQueryableStore(OrderStreamProcessing.PRODUCT_STATE_STORE,
@@ -65,6 +80,11 @@ public class OrderInteractiveQuery {
 
     private ReadOnlyKeyValueStore<String, Customer> customerStore(){
         return this.interactiveQueryService.getQueryableStore(OrderStreamProcessing.CUSTOMER_STATE_STORE, 
+        QueryableStoreTypes.keyValueStore());
+    }
+
+    private ReadOnlyKeyValueStore<String, TotalAmount> totalStore(){
+        return this.interactiveQueryService.getQueryableStore(OrderStreamProcessing.TOTAL_STATE_STORE, 
         QueryableStoreTypes.keyValueStore());
     }
     
