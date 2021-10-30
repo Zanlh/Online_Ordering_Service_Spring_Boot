@@ -8,3 +8,5 @@ cd ~
 cd ..
 cd ..
 cd kafka
+
+cd Desktop\CSCI318\Project\Task3

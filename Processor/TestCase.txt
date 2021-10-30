@@ -1,0 +1,5 @@
+curl -v localhost:8083/order/Monitor/quantity
+
+curl -v localhost:8083/order/1/products
+
+curl -v localhost:8083/order/1/totalAmount
